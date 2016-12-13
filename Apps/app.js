@@ -17,6 +17,12 @@ MainApp.config(function($routeProvider, $locationProvider) {
         controller: 'JamTheoryController',
         controllerAs: 'jt'
     })
+    .when('/axisranges', {
+        templateUrl: 'Views/axisranges.html'
+    })
+    .when('/lvdtscaling', {
+        templateUrl: 'Views/lvdtscaling.html'
+    })
     .otherwise({
         redirectTo: '404.html'
     });
