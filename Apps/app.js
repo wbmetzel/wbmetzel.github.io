@@ -27,7 +27,8 @@ MainApp.config(function($routeProvider, $locationProvider) {
         redirectTo: '404.html'
     });
     
-    $locationProvider.html5Mode(true);  // Utilize HTML5 History API
+      // Utilize HTML5 History API (I.E. 11+)
+    $locationProvider.html5Mode(true);
 });
 
   // Main controller for entire website (parent)
