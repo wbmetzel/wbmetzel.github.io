@@ -1,9 +1,8 @@
 (function() { 'use strict';
   MainApp.
     controller('LvdtController', [Lvdt]);
-        
-        
-    function Lvdt() {
+
+  function Lvdt() {
     var vm = this;
     
     vm.disp = 1;
@@ -61,7 +60,6 @@
       }
       return vm.dispWOsens_mm() / (sense);
     };
-    
-    
+
   }
 })();
