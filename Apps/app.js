@@ -1,16 +1,27 @@
   // Main App for entire website
 var MainApp = angular.module('MainApp', ['ngRoute']);
 
-MainApp.config(function($routeProvider) {
+MainApp.config(function($routeProvider, $locationProvider) {
+    
   $routeProvider
     .when('/', {
         templateUrl: 'Views/home.html',
         controller: 'MainController'
     })
+    .when('/home', {
+        templateUrl: 'Views/home.html',
+        controller: 'MainController'
+    })
     .when('/jamtheory', {
         templateUrl: 'Views/jamtheory.html',
-        controller: 'JamTheoryController as jt'
+        controller: 'JamTheoryController',
+        controllerAs: 'jt'
+    })
+    .otherwise({
+        redirectTo: '404.html'
     });
+    
+    $locationProvider.html5Mode(true);  // Utilize HTML5 History API
 });
 
   // Main controller for entire website (parent)
