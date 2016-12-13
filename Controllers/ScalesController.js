@@ -5,7 +5,9 @@
       function MajorScale() {
         var vm = this;
         vm.key = "c";
+        vm.accidental = "sharp";
         vm.semitones = ["c","c#","d","d#","e","f","f#","g","g#","a","a#","b"];
+        
         
         // Everybody loves the C Major scale, no accidentals
         vm.major = {
@@ -17,6 +19,16 @@
           sixth: "a",
           seventh: "b"
         };
+        /*
+        vm.changeAccidentals = function(val) {
+          if(val == "flat") {
+            vm.semitones = ["c","c#","d","d#","e","f","f#","g","g#","a","a#","b"];
+          } else {
+            vm.semitones = ["c","db","d","eb","e","f","gb","g","ab","a","bb","b"];
+          }
+        }
+        
+        vm.changeAccidentals(vm.accidental); */
         
         //vm.melodic = {} // must start in relative minor (6th degree of major)!! (i.e. Am as root to be in key of c)
 

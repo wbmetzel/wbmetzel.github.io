@@ -12,6 +12,14 @@
             <select style="width: 100px; text-align: center;" ng-model="vm.key" ng-change="vm.generateScale(this.vm.key)">
               <option ng-repeat="note in vm.semitones">{{ note }}</option>
             </select>
+            <!--
+            <br>
+            <label>
+              <input type="radio" ng-model="vm.accidental" value="sharp" ng-change="vm.changeAccidentals(vm.accidental)">&nbsp;Sharp
+            </label>
+            <label>
+              <input type="radio" ng-model="vm.accidental" value="flat" ng-change="vm.changeAccidentals(vm.accidental)">&nbsp;Flat
+            </label> -->
           </fieldset>
         </div>
       </div>
