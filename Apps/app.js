@@ -27,11 +27,15 @@ MainApp.config(function($routeProvider, $locationProvider) {
         redirectTo: '404.html'
     });
     
+    /*
+      I would rather have hashtags in the URL than a broken website caused by HTML5 history on refresh and base inconsistencies right now.
+      Will look for a better solution, perhaps without route provider.
+    
       // Utilize HTML5 History API (I.E. 11+)
     $locationProvider.html5Mode({
       enabled:true,
       requireBase: true
-    });
+    }); */
 });
 
   // Main controller for entire website (parent)
