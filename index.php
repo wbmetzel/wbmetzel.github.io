@@ -9,6 +9,7 @@ require_once("header.php");
 <!-- Body -->
 
 <div>
+<p>Test</p>
  <!-- Resume in panels here, use database -->
 </div>
 
