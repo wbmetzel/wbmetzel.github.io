@@ -23,9 +23,9 @@ MainApp.config(function($routeProvider, $locationProvider) {
     .when('/lvdtscaling', {
         templateUrl: 'Views/lvdtscaling.html'
     })
-    .when('/test', {
-        templateUrl: 'test.php'
-    })
+//    .when('/test', {
+//        templateUrl: 'test.php'
+//    })
     .otherwise({
         
         // Definitely not desired, but for now...
