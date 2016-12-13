@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- CSS Includes -->
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Titillium+Web" rel="stylesheet"> 
+
+<!-- JS Includes -->
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<title>Home</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="demo/demo.html">Demo</a></li>
+            <li><a href="aspect_ratio.html">Aspect Ratio</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="axis_ranges.html">Axis Ranges</a></li>
+        <li><a href="lvdt_scaling.html">LVDT Scaling</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <br><br>
+  
+  <div class="main-wrapper">
+    <div class="container axes-container" ng-app="app">
+    
+      <div class="row text-center">
+        <!-- Header -->
+        <div class="col-xs-3">
+          <span><b>&nbsp;</b></span>
+        </div>
+        <div class="col-xs-2">
+          <span><b>Minimum</b></span>
+        </div>
+        <div class="col-xs-2">
+          <span><b>Maximum</b></span>
+        </div>
+        <div class="col-xs-2">
+          <span><b>Distance</b></span>
+        </div>
+        <div class="col-xs-2">
+          <span><b>Midpoint</b></span>
+        </div>
+      </div>
+        
+        <!-- X Axis -->
+      <div class="row form-group text-center" ng-controller="AxisController as vm">
+        <div class="col-xs-3">
+          <span><b>X Axis</b></span>
+        </div>
+        <div class="col-xs-2">
+          <span><input class="form-control" type="number" value="0" id="x-min" ng-model="vm.min"></span>
+        </div>
+        <div class="col-xs-2">
+          <span><input class="form-control" type="number" value="0" id="x-max" ng-model="vm.max"></span>
+        </div>
+        <div class="col-xs-2">
+          <span>{{ vm.distance() }}</span>
+        </div>
+        <div class="col-xs-2">
+          <span>{{ vm.mid() }}</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</body>
+
+</html> 

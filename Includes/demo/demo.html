@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- CSS Includes -->
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Titillium+Web" rel="stylesheet"> 
+
+<!-- JS Includes -->
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery-ui.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/angular.min.js"></script>
+
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+	/* background: url(mario_background.png); */
+}
+</style>
+
+<title>Demo</title>
+
+</head>
+<body onload="startGame()">
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="../index.html">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="../index.html">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle active" data-toggle="dropdown" href="#">Page 1
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="active"><a href="demo.html">Demo</a></li>
+            <li><a href="aspect_ratio.html">Aspect Ratio</a></li>
+          </ul>
+        </li>
+        <li><a href="../axis_ranges.html">Axis Ranges</a></li>
+        <li><a href="../lvdt_scaling.html">LVDT Scaling</a></li>
+      </ul>
+    </div>
+  </nav>
+<br>
+
+<div class="container" id="canvas-wrapper">
+</div>
+
+<script>
+
+var div = document.getElementById("canvas-wrapper");
+
+var GamePiece;
+var VELOCITY_FACTOR = 5;
+var Obstacles = [];
+var Score;
+
+/******************************
+
+At: Game images
+
+******************************/
+
+
+function startGame() {
+	GamePiece = new component(20,20,"#008080",30,420);
+	Score = new component("30px","Consolas","#000",500,40,"text");
+	GameArea.start();
+}
+
+// Create Canvas
+var GameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 900;
+        this.canvas.height = 467;
+        this.context = this.canvas.getContext("2d");
+        //document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        div.appendChild(this.canvas);
+		this.frameNo = 0;
+		this.interval = setInterval(updateGameArea,20);
+		window.addEventListener('keydown', function(e) {
+		  GameArea.keys = (GameArea.keys || []);
+		  GameArea.keys[e.keyCode] = true;
+		})
+		window.addEventListener('keyup', function(e) {
+		  GameArea.keys[e.keyCode] = false;
+		})
+    },
+	clear: function() {
+	  this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+	},
+	stop: function() {
+	  clearInterval(this.interval);
+	}
+}
+
+function everyinterval(n) {
+  if( (GameArea.frameNo / n) % 1 == 0 ) { return true; }
+  return false;
+}
+
+// Create Game Piece/ Character
+function component(width,height,color,x,y,type) {
+  this.type = type;
+  this.width = width;
+  this.height = height;
+  this.speedX = 0;
+  this.speedY = 0;
+  this.x = x;
+  this.y = y;
+  
+  this.update = function() {
+    GActx = GameArea.context;
+    if(this.type == "text") {
+	  GActx.font = this.width + " " + this.height;
+	  GActx.fillStyle = color;
+	  GActx.fillText(this.text, this.x, this.y);
+	} else {
+      GActx.fillStyle = color;
+      GActx.fillRect(this.x,this.y,this.width,this.height);
+	}
+  }
+  
+  this.newPos = function() {
+    this.x += this.speedX;
+	this.y += this.speedY;
+  }
+  
+  this.crashWith = function(otherobj) {
+    var myleft = this.x;
+	var myright = this.x + this.width;
+	var mytop = this.y;
+	var mybottom = this.y + this.height;
+	var otherleft = otherobj.x;
+	var otherright = otherobj.x + otherobj.width;
+	var othertop = otherobj.y;
+	var otherbottom = otherobj.y + otherobj.height;
+	var crash = true;
+	
+    var collisionCheck = function(lhs,rhs) {
+		return lhs < rhs;
+	}
+	
+	if(collisionCheck(mybottom,othertop) || collisionCheck(otherbottom,mytop) ||
+	   collisionCheck(myright,otherleft) || collisionCheck(otherright,myleft) ) {
+		 crash = false;
+	}
+	
+	return crash;
+
+  }
+  
+}
+
+// Update frames/refresh rate of canvas
+function updateGameArea() {
+  var x,y;
+  for(i = 0; i < Obstacles.length; i++) {
+	  if(GamePiece.crashWith(Obstacles[i])) {
+		GameArea.stop();
+		return;
+	  }
+  }
+  
+  GameArea.clear();
+  GameArea.frameNo++;
+  
+  if(GameArea.frameNo == 1 || everyinterval(150)) {
+    var x = GameArea.canvas.width;
+	var minHeight = 20;
+	var maxHeight = 200;
+	var height = Math.floor(Math.random() * (maxHeight-minHeight+1) + minHeight);
+	var minGap = 50;
+	var maxGap = 200;
+	var gap = Math.floor(Math.random() * (maxGap-minGap+1)+minGap);
+	Obstacles.push(new component(10,height,"#008080", x, 0));
+	Obstacles.push(new component(10,x-height-gap,"#008080", x, height+gap));
+  }
+  
+  for(b = 0; b < Obstacles.length; b++) {
+      Obstacles[b].x -= 2;
+	  Obstacles[b].update();
+  }
+
+  GamePiece.speedX = 0;
+  GamePiece.speedY = 0;
+  
+  if (GameArea.keys) {
+	if (GameArea.keys[37]) { GamePiece.speedX = -1 * VELOCITY_FACTOR; }
+	if (GameArea.keys[39]) { GamePiece.speedX = 1 * VELOCITY_FACTOR; }
+	if (GameArea.keys[38]) { GamePiece.speedY = -1 * VELOCITY_FACTOR; }
+	if (GameArea.keys[40]) { GamePiece.speedY = 1 * VELOCITY_FACTOR; }
+  }
+  Score.text = "SCORE: " + (GameArea.frameNo);
+  Score.update();
+  GamePiece.newPos();
+  GamePiece.update();
+}
+
+function moveup() {
+  GamePiece.speedY -= 1 * VELOCITY_FACTOR;
+}
+
+function movedown() {
+  GamePiece.speedY += 1 * VELOCITY_FACTOR;
+}
+
+function moveleft() {
+  GamePiece.speedX -= 1 * VELOCITY_FACTOR;
+}
+
+function moveright() {
+  GamePiece.speedX += 1 * VELOCITY_FACTOR;
+}
+
+function stopMove() {
+  GamePiece.speedX = 0;
+  GamePiece.speedY = 0;
+}
+
+</script>
+
+<br>
+  <div>
+  <!--
+    <button onmousedown="moveup()" onmouseup="stopMove()" ontouchstart="moveup()"> UP </button>
+	<button onmousedown="movedown()" onmouseup="stopMove()" ontouchstart="movedown()"> DOWN </button>
+	<button onmousedown="moveleft()" onmouseup="stopMove()" ontouchstart="moveleft()"> LEFT </button>
+	<button onmousedown="moveright()" onmouseup="stopMove()" ontouchstart="moveright()"> RIGHT </button> -->
+  </div>
+</body>
+</html>

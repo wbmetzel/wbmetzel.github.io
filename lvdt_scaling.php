@@ -1,0 +1,154 @@
+<?php require_once("header.php"); ?>
+ 
+  <br><br>
+  
+  <div class="main-wrapper" ng-app="app" >
+    <div class="container axes-container" ng-controller="LvdtController as vm">
+    
+      <div class="row text-center">
+        <!-- Header -->
+        <div class="col-xs-11 h4">
+          <span><b>LVDT Scaling Calculator</b></span>
+        </div>
+      </div>
+      
+      <div class="center col-xs-10 row">
+        <div class="panel panel-default">
+          <div class="panel-body">
+          
+            <div class="col-xs-7 pull-left">
+              <div class="row form-group text-center">
+                <div class="col-xs-3">
+                  <span><b>Max Displacement</b></span>
+                </div>
+                <div class="col-xs-4">
+                  <span><input class="form-control" type="number" value="0" id="x-min" ng-model="vm.disp"></span>
+                </div>
+                <div class="col-xs-2 units">
+                  <span>inches</span>
+                </div>
+              </div>
+                   
+              <div class="row form-group text-center">
+                <div class="col-xs-3 text-center">
+                  <span><b>Full Scale Volts</b></span>
+                </div>
+                <div class="col-xs-4">
+                  <span><input class="form-control" type="number" value="0" id="y-min" ng-model="vm.fsvolts"></span>
+                </div>
+                <div class="col-xs-2 units">
+                  <span>volts</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-xs-5 pull-right sf-div">
+              <div class="row form-group text-center">
+                <fieldset>
+                  <legend>Scaling Factor</legend>
+                  <span class="text-center"><b>{{ vm.scalingFactor() }}</b></span>
+                </fieldset>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="row">
+
+        <div class="col-xs-5" style="margin: 1px;">
+          <div class="well">
+            <div class="row form-group text-center">
+              <fieldset>
+                <legend>Variables</legend>
+              </fieldset>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-5">
+                <span><b>Current Input</b></span>
+              </div>
+              <div class="col-xs-7">
+                <span><input class="form-control" type="number" value="0" id="x-min" ng-model="vm.impsensor"></span>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-5">
+                <span><b>Zero Offset</b></span>
+              </div>
+              <div class="col-xs-7">
+                <span><input class="form-control" type="number" value="0" id="x-min" ng-model="vm.zero"></span>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-5">
+                <span><b>Sensitivity</b></span>
+              </div>
+              <div class="col-xs-7">
+                <span><input class="form-control" type="number" value="0" id="x-min" ng-model="vm.sensitivity"></span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      
+        <div class="col-xs-3 panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="glyphicon glyphicon-minus">&nbsp;</span>
+              <span class="h5"><b>Display without Sensitivity</b></span>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group text-center">
+                <fieldset>
+                  <legend>mm</legend>
+                  <span class="text-center">{{ vm.dispWOsens_mm() }}</span>
+                </fieldset>
+
+                <fieldset>
+                  <legend>inches</legend>
+                  <span class="text-center">{{ vm.dispWOsens_in() }}</span>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xs-3 panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span class="glyphicon glyphicon-plus">&nbsp;</span>
+              <span class="h5"><b>Display with Sensitivity</b></span>
+            </div>
+            <div class="panel-body">
+              <div class="row form-group text-center">
+                <fieldset>
+                  <legend>mm</legend>
+                  <span class="text-center">{{ vm.dispWsens_mm() }}</span>
+                </fieldset>
+                <fieldset>
+                  <legend>no 0.8</legend>
+                  <span class="text-center">{{ vm.noPTeight() }}</span>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+        
+        <!-- -->
+        
+      <br>
+      
+    </div>
+  </div>
+  
+<?php require_once("footer.php"); ?>
+<script src="Includes/js/LvdtController.js"></script>
+</body>
+</html>
