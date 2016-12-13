@@ -28,7 +28,10 @@ MainApp.config(function($routeProvider, $locationProvider) {
     });
     
       // Utilize HTML5 History API (I.E. 11+)
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode({
+      enabled:true,
+      requireBase: true
+    });
 });
 
   // Main controller for entire website (parent)
