@@ -23,8 +23,14 @@ MainApp.config(function($routeProvider, $locationProvider) {
     .when('/lvdtscaling', {
         templateUrl: 'Views/lvdtscaling.html'
     })
+    .when('/test', {
+        templateUrl: 'test.php'
+    })
     .otherwise({
-        redirectTo: '404.html'
+        
+        // Definitely not desired, but for now...
+        templateUrl: '404.html'
+        //redirectTo: '404.html'
     });
     
     /*
