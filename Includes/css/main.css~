@@ -33,9 +33,3 @@ body {
 canvas {
   margin-top: 10%;
 }
-
-#brand {
-  color: #66b3ff;
-  font-family: 'Architects Daughter', cursive;
-  font-weight: 500;
-}
