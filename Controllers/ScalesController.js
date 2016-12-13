@@ -7,7 +7,8 @@
         vm.key = "c";
         vm.semitones = ["c","c#","d","d#","e","f","f#","g","g#","a","a#","b"];
         
-        vm.scale = {
+        // Everybody loves the C Major scale, no accidentals
+        vm.major = {
           tonic: "c",
           second: "d",
           third: "e",
@@ -16,6 +17,8 @@
           sixth: "a",
           seventh: "b"
         };
+        
+        //vm.melodic = {} // must start in relative minor (6th degree of major)!! (i.e. Am as root to be in key of c)
 
         vm.getIndex = function(index, steps) {
           var current = index + steps;
@@ -26,45 +29,52 @@
           }
         };
         
-        vm.generateMajorScale = function(key) {
+        vm.generateMajorScale = function(key,step1,step2,step3,step4,step5,step6) {
+          var scale = {
+            tonic: "",
+            second: "",
+            third: "",
+            fourth: "",
+            fifth: "",
+            sixth: "",
+            seventh: ""
+          };
+
           var index = (vm.semitones).indexOf(key);
-          vm.scale['tonic'] = vm.semitones[index];
+          scale['tonic'] = vm.semitones[index];
           
-           // Whole step, generate second
-          index = vm.getIndex(index,2);
-          vm.scale['second'] = vm.semitones[index];
+           // Generate second
+          index = vm.getIndex(index,step1);
+          scale['second'] = vm.semitones[index];
                     
-           // Whole step, generate third
-          index = vm.getIndex(index,2);
-          vm.scale['third'] = vm.semitones[index];
+           // Generate third
+          index = vm.getIndex(index,step2);
+          scale['third'] = vm.semitones[index];
                     
-           // Half step, generate fourth
-          index = vm.getIndex(index,1);
-          vm.scale['fourth'] = vm.semitones[index];
+           // Generate fourth
+          index = vm.getIndex(index,step3);
+          scale['fourth'] = vm.semitones[index];
                     
-           // Whole step, generate fifth
-          index = vm.getIndex(index,2);
-          vm.scale['fifth'] = vm.semitones[index];
+           // Generate fifth
+          index = vm.getIndex(index,step4);
+          scale['fifth'] = vm.semitones[index];
                     
-           // Whole step, generate sixth
-          index = vm.getIndex(index,2);
-          vm.scale['sixth'] = vm.semitones[index];
+           // Generate sixth
+          index = vm.getIndex(index,step5);
+          scale['sixth'] = vm.semitones[index];
                     
-           // Whole step, generate seventh
-          index = vm.getIndex(index,2);
-          vm.scale['seventh'] = vm.semitones[index];
+           // Generate seventh
+          index = vm.getIndex(index,step6);
+          scale['seventh'] = vm.semitones[index];
 
+          return scale;
+          
         };
 
-
-
-        
         vm.generateScale = function(key) {
-          vm.generateMajorScale(key);
+          vm.major = vm.generateMajorScale(key,2,2,1,2,2,2);
         };
-        
-        
-        
+
       }
 
 })();
