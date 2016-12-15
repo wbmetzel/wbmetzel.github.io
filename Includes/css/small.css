@@ -1,0 +1,3 @@
+#main-wrapper { width: 548px; }
+#main-wrapper:after { content: "Narrow Layout"; }
+#secondary-two { display: none; }

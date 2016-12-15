@@ -39,3 +39,7 @@ canvas {
   font-family: 'Architects Daughter', cursive;
   font-weight: 500;
 }
+
+@-ms-viewport{
+  width: device-width;
+}

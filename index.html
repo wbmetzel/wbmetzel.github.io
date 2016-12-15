@@ -2,6 +2,7 @@
 <html ng-app="MainApp">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/> 
     <!-- <base href="/wbmetzel.github.io/"> -->
     
     <!-- Google Libraries/Fonts -->
@@ -16,6 +17,12 @@
     <link rel="stylesheet" type="text/css" href="Includes/css/main.css">
     <link rel="stylesheet" type="text/css" href="Includes/css/lvdt.css">
     
+      <!-- Responsive Junk
+    <link rel='stylesheet' media='screen and (max-width: 700px)' href='Includes/css/small.css' />
+    <link rel='stylesheet' media='screen and (min-width: 701px) and (max-width: 900px)' href='Includes/css/medium.css' />
+    <link rel='stylesheet' media='screen and (min-width: 901px)' href='Includes/css/large.css' />
+     -->
+     
     <!-- External Javascript -->
     <script src="Includes/js/jquery.js"></script>
     <script src="Includes/js/jquery-ui.min.js"></script>
@@ -38,31 +45,39 @@
      // Menu
      // ============================== -->
      
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse " role="navigation" style="border-radius: 0px;">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" id="brand" href="#home">W. B. Metzel</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#jamtheory">Music</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <!--<li><a href="aspect_ratio.php">Aspect Ratio</a></li>-->
-            <li><a href="#axisranges">Axis Ranges</a></li>
-            <li><a href="#lvdtscaling">LVDT Scaling</a></li>
-<!--            <li><a href="#test">Test</a></li> -->
-          </ul>
-        </li>
-        <!-- <li><a href="Includes/demo/demo.php">Demo</a></li> -->
-      </ul>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#jamtheory">Music</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <!--<li><a href="aspect_ratio.php">Aspect Ratio</a></li>-->
+              <li><a href="#axisranges">Axis Ranges</a></li>
+              <li><a href="#lvdtscaling">LVDT Scaling</a></li>
+                <!--            <li><a href="#test">Test</a></li> -->
+            </ul>
+          </li>
+              <!-- <li><a href="Includes/demo/demo.php">Demo</a></li> -->
+        </ul>
+      </div>
     </div>
   </nav>
 
 <!-- Body -->
 
-<div id="main">
+<div id="main-wrapper">
 
   <div ng-view>
   </div>
