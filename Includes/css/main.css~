@@ -2,6 +2,7 @@ body {
   background-color: #dfdfdf;
   color: #66b3ff;
   font-family: 'Titillium Web', sans-serif;
+  height: 800px;
 }
 
 .container {
@@ -32,4 +33,14 @@ body {
 
 canvas {
   margin-top: 10%;
+}
+
+#brand {
+  color: #66b3ff;
+  font-family: 'Architects Daughter', cursive;
+  font-weight: 500;
+}
+
+@-ms-viewport{
+  width: device-width;
 }

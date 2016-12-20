@@ -31,6 +31,7 @@
     <script src="Includes/js/main.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="Apps/app.js"></script>
+    <script src="Controllers/MainController.js"></script>
     <script src="Controllers/JamTheoryController.js"></script>
     <script src="Controllers/ScalesController.js"></script>
     <script src="Controllers/LvdtController.js"></script>
@@ -40,11 +41,11 @@
   
   </head>
 
-<body ng-controller="MainController">
+<body ng-controller="MainController as mn">
 	
 <!-- // ==============================
      // Menu
-     // ============================== -->
+     // ============================== -->                                                                  
      
   <nav class="navbar navbar-inverse navbar-fixed-top" id="menu-wrapper" role="navigation" style="border-radius: 0px;">
     <div class="container-fluid">
@@ -59,14 +60,14 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#jamtheory">Music</a></li>
+          <li ng-class="{active: mn.isActive('/jamtheory') }" ><a href="#jamtheory">Music</a></li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">Tools
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <!--<li><a href="aspect_ratio.php">Aspect Ratio</a></li>-->
-              <li><a href="#axisranges">Axis Ranges</a></li>
-              <li><a href="#lvdtscaling">LVDT Scaling</a></li>
+              <li ng-class="{active: mn.isActive('/axisranges') }"><a href="#axisranges">Axis Ranges</a></li>
+              <li ng-class="{active: mn.isActive('/lvdtscaling') }"><a href="#lvdtscaling">LVDT Scaling</a></li>
                 <!--            <li><a href="#test">Test</a></li> -->
             </ul>
           </li>

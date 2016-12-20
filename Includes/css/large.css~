@@ -1,7 +1,5 @@
 body { background: #999; }
-#main-wrapper {
-
-}
+#main-wrapper { width: 900px; position: relative; }
 #main-wrapper:after { content: "Wide Layout"; }
 #main-content { float: left; width: 440px; height: 300px; margin-left: 218px; }
 #secondary-one { width: 170px; height: 300px; position: absolute; left: 0; top: 64px; }
