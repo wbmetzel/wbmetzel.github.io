@@ -1,14 +1,12 @@
 body {
   background-color: #dfdfdf;
-  color: #66b3ff;
+  color: #333;
   font-family: 'Titillium Web', sans-serif;
-  height: 800px;
 }
 
 #main-wrapper {
   margin-top: 51px;
   padding: 1%;
-
 }
 
 .container {
@@ -55,4 +53,19 @@ canvas {
 
 @-ms-viewport{
   width: device-width;
+}
+
+#home-wrapper {
+  background-size: cover;
+  background-image: url("../images/waves.jpg");
+  background-color: #000;
+  background-position: center;
+  padding: 20%;
+}
+
+.about-container {
+  padding: 5%;
+  color: rgba(255,255,255,1);
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 4px;
 }
