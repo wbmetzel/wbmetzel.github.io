@@ -19,6 +19,10 @@ body {
   margin-top: 10px;
 }
 
+li {
+  cursor: pointer; cursor: hand;
+}
+
 .axes-container {
   /* Inset shadow */
   background: rgb(242,245,246); /* Old browsers */
