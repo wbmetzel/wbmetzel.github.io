@@ -1,0 +1,244 @@
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/ui-bootstrap.min.js"></script>
+
+
+<script src="app.module.js"></script>
+<script src="demo.controller.js"></script>
+<body ng-app="app">
+
+<!--
+<div ng-controller="DemoController as vm">
+   <p>Name : <input type="text" ng-model="vm.name"></p>
+   <h1>{{ vm.test + ": " + vm.name }}</h1>
+   <h3>{{ "Age: " + vm.getAge() }}</h3>
+</div> 
+-->
+
+<div class="form-wrapper col-md-6" style="background-color: rgba(0,80,210,0.1); border: 1px solid rgba(170,170,170,0.7); border-radius: 8px; margin: 4%; padding: 2%;" ng-controller="DemoController as vm">
+  <form class="form-horizontal">
+  <fieldset>
+  
+  <!-- Form Name -->
+  <legend>Demo Form</legend>
+  
+  <div ng-if="vm.section === 1">
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="fname">First Name</label>  
+      <div class="col-md-4">
+      <input name="fname" class="form-control input-md" id="fname" type="text" placeholder="First Name">
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="middle">MI</label>  
+      <div class="col-md-1">
+      <input name="middle" class="form-control input-md" id="middle" type="text" placeholder="">
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="lname">Last Name</label>  
+      <div class="col-md-4">
+      <input name="lname" class="form-control input-md" id="lname" type="text" placeholder="Last Name">
+        
+      </div>
+    </div>
+    
+    <!-- Multiple Radios -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="gender">Gender</label>
+      <div class="col-md-4">
+      <div class="radio">
+        <label for="gender-0">
+          <input name="gender" id="gender-0" type="radio" checked="checked" value="1">
+          Male
+        </label>
+      </div>
+      <div class="radio">
+        <label for="gender-1">
+          <input name="gender" id="gender-1" type="radio" value="2">
+          Female
+        </label>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  <div ng-if="vm.section === 2">
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="addr-1">Address</label>  
+      <div class="col-md-4">
+      <input name="addr-1" class="form-control input-md" id="addr-1" type="text" placeholder="Address">
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="addr-2"></label>  
+      <div class="col-md-4">
+      <input name="addr-2" class="form-control input-md" id="addr-2" type="text" placeholder="Address line 2 if necessary">
+        
+      </div>
+    </div>
+    
+    <!-- Search input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="postal">Zip Code</label>
+      <div class="col-md-2">
+        <input name="postal" class="form-control input-md" id="postal" type="search" placeholder="">
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="city">City</label>  
+      <div class="col-md-4">
+      <input name="city" class="form-control input-md" id="city" type="text" placeholder="City">
+        
+      </div>
+    </div>
+    
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="state">State</label>
+      <div class="col-md-4">
+        <select name="state" class="form-control" id="state">
+          <option value="1">New York</option>
+          <option value="2">Virginia</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div ng-if="vm.section === 3">
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="contact">Preferred Contact</label>
+      <div class="col-md-4">
+        <select name="contact" class="form-control" id="contact" ng-model="vm.prefContact">
+          <option value="email">Email</option>
+          <option value="cell">Cell phone</option>
+          <option value="home">Home Phone</option>
+          <option value="other">Other...</option>
+        </select>
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group" ng-if="vm.prefContact === 'other'">
+      <label class="col-md-4 control-label" for="contactother"></label>  
+      <div class="col-md-4">
+      <input name="contactother" class="form-control input-md" id="contactother" type="text" placeholder="Other...">
+      <span class="help-block">Enter preferred form of contact</span>  
+      </div>
+    </div>
+    
+    <!-- Prepended text-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="phonecell">Phone Number</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">Cell</span>
+          <input name="phonecell" class="form-control" id="phonecell" type="text" placeholder="">
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Prepended text-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="phonehome"></label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-addon">Home</span>
+          <input name="phonehome" class="form-control" id="phonehome" type="text" placeholder="">
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="email">Email</label>  
+      <div class="col-md-4">
+      <input name="email" class="form-control input-md" id="email" type="text" placeholder="Email">
+        
+      </div>
+    </div>
+    
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="languages">Languages</label>
+      <div class="col-md-4">
+      <div class="checkbox">
+        <label for="languages-0">
+          <input name="languages" id="languages-0" type="checkbox" value="1">
+          English
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="languages-1">
+          <input name="languages" id="languages-1" type="checkbox" value="2">
+          Spanish
+        </label>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="description">Description</label>
+      <div class="col-md-4">                     
+        <textarea name="description" class="form-control" id="description">Describe something...</textarea>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submit-btn"></label>
+      <div class="col-md-8">
+        <button name="submit-btn" class="btn btn-info" id="submit-btn">Submit</button>
+        <button name="cancel-btn" class="btn btn-default" id="cancel-btn">Cancel</button>
+      </div>
+    </div>
+  
+  </div>
+  
+  </fieldset>
+  </form>
+
+    <!-- Pagination -->
+  <div class="pull-left">
+    <div class="col-md-8">
+      <button ng-if="vm.section > 1" name="prev-btn" class="btn btn-info" ng-click="vm.prevSection()" id="prev-btn"><< Prev</button>
+    </div>
+  </div>
+  <div class="pull-right">
+    <div class="col-md-8">
+      <button ng-if="vm.section < 3" name="next-btn" class="btn btn-info" ng-click="vm.nextSection()" id="next-btn">Next >></button>
+    </div>
+  </div>
+  
+</div>
+
+</body>
+</html> 
