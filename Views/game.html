@@ -1,0 +1,240 @@
+
+  <style>
+  
+  
+  body {
+    background-color: #000;
+    margin: 2%;
+  }
+  
+  #game-wrapper {
+    padding-top: 10%;
+  }
+  
+  canvas, #game-area {
+      border: 1px solid #d3d3d3;
+      background-color: #333;
+      display: block;
+      margin: 0 auto;
+  }
+  </style>
+
+  <div id="game-wrapper">
+    <canvas id="game-area" width="480" height="320"></canvas>
+  </div>
+  
+  <script type="text/javascript">
+  
+  // JQuery hack to remove styles from template, si, es muy feo
+(function() {
+  $("#main-wrapper").removeClass("main-wrapper");
+})();
+  
+    var canvas = document.getElementById("game-area");
+    var ctx = canvas.getContext("2d");
+    var gameOver = false;
+    var brickset = [];
+    var score = 0;
+    var lives = 2;
+    var ball = {
+     x: canvas.width / 2,
+     y: canvas.height - 30,
+     radius: 10,
+     startAngle: 0,
+     endAngle: Math.PI * 2, // sangle and eangle in radians
+     ccw: false, // Draw counter-clockwise
+     fillStyle: "rgba(0, 255, 255, 0.5)"
+    };
+    var paddle = {
+      width: 75,
+      height: 10,
+      x: (canvas.width - 75) / 2,  // Subtract this.width
+      y: canvas.height - 10,       // Subtract this.height
+      fillStyle: "#0095DD"
+    };
+    var move = {
+      x: 2,
+      y: -2,
+      direction: ""
+    };
+    var brick = {
+      rowCount: 3,
+      colCount: 5,
+      width: 75,
+      height: 20,
+      padding: 10,
+      offsetTop: 30,
+      offsetLeft: 30,
+      fillStyle: "#E800E8"
+    };
+    
+    for(var col = 0; col < brick.colCount; col++) {
+      brickset[col] = [];
+      for(var row = 0; row < brick.rowCount; row++) {
+        brickset[col][row] = {
+          x: 0,
+          y: 0,
+          status: 1
+        };
+      }
+    }
+    
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("mousemove", mouseMoveHandler, false);
+    
+    function keyDownHandler(e) {
+      switch(e.keyCode) {
+        case 39:
+          move.direction = "right";
+          break;
+        case 37:
+          move.direction = "left";
+          break;
+        default:
+          move.direction = "";
+      }
+    }
+    
+    function keyUpHandler(e) {
+      move.direction = "";
+    }
+    
+    function mouseMoveHandler(e) {
+      var relativeX = e.clientX - canvas.offsetLeft;
+      if(relativeX > 0 && relativeX < canvas.width) {
+        paddle.x = relativeX - paddle.width / 2;
+      }
+    }
+    
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, ball.startAngle, ball.endAngle, ball.ccw);
+      ctx.fillStyle = ball.fillStyle;
+      ctx.fill();
+      ctx.closePath();
+    }
+    
+    function drawPaddle() {      
+      ctx.beginPath();
+      ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+      ctx.fillStyle = paddle.fillStyle;
+      ctx.fill();
+      ctx.closePath();
+    }
+    
+    function drawBricks() {
+      for(var col = 0; col < brick.colCount; col++) {
+        for(var row = 0; row < brick.rowCount; row++) {
+          if(brickset[col][row].status == 1) {
+            var brickX = (col * (brick.width + brick.padding)) + brick.offsetLeft;
+            var brickY = (row * (brick.height + brick.padding)) + brick.offsetTop;
+            brickset[col][row].x = brickX;
+            brickset[col][row].y = brickY;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brick.width, brick.height);
+            ctx.fillStyle = brick.fillStyle;
+            ctx.fill();
+            ctx.closePath();
+          }
+        }
+      }
+    }
+    
+    function brickCollision() {
+      for(var col = 0; col < brick.colCount; col++) {
+        for(var row = 0; row < brick.rowCount; row++) {
+          var b = brickset[col][row];
+          if(b.status == 1) {
+            if(ball.x > b.x && ball.x < b.x + brick.width && ball.y > b.y && ball.y < b.y + brick.height) {
+              move.y = -(move.y);
+              b.status = 0;
+              move.x += (move.x * .075);
+              move.y += (move.y * .075);
+              score += 100;
+              if((score / 100) == (brick.rowCount * brick.colCount)) {
+                alert("You Win!!");
+                document.location.reload();
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    function drawScore() {
+      ctx.font = "16px Aldrich";
+      ctx.fillStyle = "rgba(0,230,230,0.9)";
+      ctx.fillText("Score: " + score, 8, 20);
+    }
+    
+    function drawLives() {
+      ctx.font = "16px Aldrich";
+      ctx.fillStyle = "rgba(230,230,255,0.7)";
+      ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+    }
+    
+    function update() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      drawBricks();
+      drawBall();
+      drawPaddle();
+      drawScore();
+      drawLives();
+      brickCollision();
+      
+      if(ball.x + move.x > (canvas.width - ball.radius) || ball.x + move.x < ball.radius) {
+        move.x = -(move.x); // Negate with javascript unary operator
+      }
+      
+      if(ball.y + move.y < ball.radius) {
+        move.y = -(move.y);
+      } else if((ball.y + move.y) > (canvas.height - ball.radius)) {
+        if(ball.x > paddle.x && ball.x < (paddle.x + paddle.width)) {
+          move.y = -(move.y);
+        } else {
+          lives--;
+          if(lives >= 0) {
+            ball.x = canvas.width/2;
+            ball.y = canvas.height-30;
+            move.x = 2 * (4 - (lives + 1));
+            move.y = -2 * (4 - (lives + 1));
+            paddle.x = (canvas.width - paddle.width)/2;
+          } else {
+            alert("Game over");
+            document.location.reload();
+            //gameOver = true;
+          }
+        }
+      }
+      
+      if((move.direction).length > 0) {
+        switch(move.direction) {
+          case "right":
+            if(paddle.x < (canvas.width - paddle.width)) {
+              paddle.x += 7;
+            }
+            break;
+          case "left":
+            if(paddle.x > 0) {
+              paddle.x -= 7;
+            }
+            break;
+          default:
+            // Do nothing
+        }
+      }
+      
+      ball.x += move.x;
+      ball.y += move.y;
+      
+      requestAnimationFrame(update);
+    }
+    
+   // if(gameOver == false) {
+      update();
+            
+   // }
+    
+  </script>
+  

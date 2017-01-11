@@ -61,6 +61,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar">
           <li ng-class="{active: mn.isActive('/jamtheory') }" ><a href="#jamtheory">Music</a></li>
+          <li ng-class="{active: mn.isActive('/game') }" ><a href="#game">Game</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="">Tools
             <span class="caret"></span></a>
@@ -86,7 +87,7 @@
 
 <!-- Body -->
 
-<div id="main-wrapper">
+<div id="main-wrapper" class="main-wrapper">
 
   <div ng-view>
   </div>

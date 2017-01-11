@@ -4,7 +4,7 @@ body {
   font-family: 'Titillium Web', sans-serif;
 }
 
-#main-wrapper {
+.main-wrapper {
   margin-top: 51px;
   padding: 1%;
 }
@@ -43,10 +43,6 @@ li {
 
 #junk {
   font-family: 'Indie Flower', cursive;
-}
-
-canvas {
-  margin-top: 10%;
 }
 
 #brand {

@@ -1,8 +1,12 @@
 body {
   background-color: #dfdfdf;
-  color: #66b3ff;
+  color: #333;
   font-family: 'Titillium Web', sans-serif;
-  height: 800px;
+}
+
+#main-wrapper {
+  margin-top: 51px;
+  padding: 1%;
 }
 
 .container {
@@ -15,13 +19,23 @@ body {
   margin-top: 10px;
 }
 
+li {
+  cursor: pointer; cursor: hand;
+}
+
 .axes-container {
+  /* Inset shadow */
   background: rgb(242,245,246); /* Old browsers */
   background: -moz-linear-gradient(top, rgba(242,245,246,1) 0%, rgba(227,234,237,1) 89%, rgba(200,215,220,1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 89%,rgba(200,215,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 89%,rgba(200,215,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
 
+    /* Outset Shadow */
+  -webkit-box-shadow: 7px 7px 5px -4px rgba(0,0,0,0.18);
+  -moz-box-shadow: 7px 7px 5px -4px rgba(0,0,0,0.18);
+  box-shadow: 7px 7px 5px -4px rgba(0,0,0,0.18);
+  
   border: 1px solid rgba(0,0,0,0.3);
   box-shadow: 5px 5px 5px rgba(99,99,99,0.2);
   color: #666;
@@ -43,4 +57,19 @@ canvas {
 
 @-ms-viewport{
   width: device-width;
+}
+
+#home-wrapper {
+  background-size: cover;
+  background-image: url("../images/waves.jpg");
+  background-color: #000;
+  background-position: center;
+  padding: 20%;
+}
+
+.about-container {
+  padding: 5%;
+  color: rgba(255,255,255,1);
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 4px;
 }

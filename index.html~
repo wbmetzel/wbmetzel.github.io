@@ -31,6 +31,7 @@
     <script src="Includes/js/main.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="Apps/app.js"></script>
+    <script src="Controllers/MainController.js"></script>
     <script src="Controllers/JamTheoryController.js"></script>
     <script src="Controllers/ScalesController.js"></script>
     <script src="Controllers/LvdtController.js"></script>
@@ -40,11 +41,11 @@
   
   </head>
 
-<body ng-controller="MainController">
+<body ng-controller="MainController as mn">
 	
 <!-- // ==============================
      // Menu
-     // ============================== -->
+     // ============================== -->                                                                  
      
   <nav class="navbar navbar-inverse navbar-fixed-top" id="menu-wrapper" role="navigation" style="border-radius: 0px;">
     <div class="container-fluid">
@@ -58,20 +59,27 @@
         </button>
       </div>
       <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#jamtheory">Music</a></li>
+        <ul class="nav navbar-nav navbar">
+          <li ng-class="{active: mn.isActive('/jamtheory') }" ><a href="#jamtheory">Music</a></li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">Tools
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <!--<li><a href="aspect_ratio.php">Aspect Ratio</a></li>-->
-              <li><a href="#axisranges">Axis Ranges</a></li>
-              <li><a href="#lvdtscaling">LVDT Scaling</a></li>
+              <li ng-class="{active: mn.isActive('/axisranges') }"><a href="#axisranges">Axis Ranges</a></li>
+              <li ng-class="{active: mn.isActive('/lvdtscaling') }"><a href="#lvdtscaling">LVDT Scaling</a></li>
                 <!--            <li><a href="#test">Test</a></li> -->
             </ul>
           </li>
               <!-- <li><a href="Includes/demo/demo.php">Demo</a></li> -->
         </ul>
+       
+        <!--
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
+        </ul>
+        -->
+        
       </div>
     </div>
   </nav>
@@ -85,6 +93,51 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="Contact" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="Contact">Contact W.B. Metzel</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="fname">First Name&nbsp;</label>
+            <input id="fname" name="fname" placeholder="First Name" class="form-control" type="text"/>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="lname">Last Name&nbsp;</label>
+            <input id="lname" name="lname" placeholder="Last Name" class="form-control" type="text"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="phone">Phone&nbsp;</label>
+            <input id="phone" name="phone" placeholder="Phone" class="form-control" type="text"/>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="email">Email&nbsp;</label>
+            <input id="email" name="email" placeholder="Email" class="form-control" type="text"/>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-10 form-group" style="margin-left: 7%; margin-right: 7%;">
+            <label for="message">Message&nbsp;</label>
+            <textarea id="message" name="message" placeholder="Write your message here" class="form-control" type="text"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Send</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
