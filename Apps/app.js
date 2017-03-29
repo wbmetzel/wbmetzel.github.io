@@ -12,6 +12,9 @@ MainApp.config(function($routeProvider, $locationProvider) {
         templateUrl: 'Views/home.html',
         controller: 'MainController'
     })
+    .when('/intervals', {
+        templateUrl: 'Views/intervals.html'
+    })
     .when('/game', {
         templateUrl: 'Views/game.html'
     })
